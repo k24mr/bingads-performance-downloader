@@ -352,7 +352,8 @@ def build_ad_performance_request(api_client: BingReportClient,
             "AveragePosition",
             "Conversions",
             "ConversionRate",
-            "CostPerConversion"
+            "CostPerConversion",
+            "Revenue"
         ])
     else:
         report_columns.AdPerformanceReportColumn.append(fields)
