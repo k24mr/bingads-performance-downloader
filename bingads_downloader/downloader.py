@@ -76,7 +76,7 @@ def download_account_structure_data(api_client: BingReportClient):
         tmp_filepath = Path(tmp_dir, filename)
         with gzip.open(str(tmp_filepath), 'wt') as tmp_campaign_structure_file:
             header = ['AdId', 'AdTitle', 'AdGroupId', 'AdGroupName', 'CampaignId',
-                      'CampaignName', 'AccountId', 'AccountName', 'Attributes']
+                      'CampaignName', 'AccountId', 'AccountName', 'CurrencyCode', 'Attributes']
             writer = csv.writer(tmp_campaign_structure_file, delimiter="\t")
             ad_data = get_ad_data(api_client, tmp_dir)
             campaign_attributes = get_campaign_attributes(api_client, tmp_dir)
@@ -94,6 +94,7 @@ def download_account_structure_data(api_client: BingReportClient):
                       ad_data_dict['CampaignName'],
                       ad_data_dict['AccountId'],
                       ad_data_dict['AccountName'],
+                      ad_data_dict['CurrencyCode'],
                       json.dumps(attributes)
                       ]
 
@@ -113,6 +114,7 @@ def get_ad_data(api_client: BingReportClient, tmp_dir: Path) -> {}:
     ad_data = {}
     fields = ["TimePeriod",
               "DeviceType",
+              "CurrencyCode",
 
               "AccountId",
               "AccountName",
@@ -147,7 +149,7 @@ def get_ad_data(api_client: BingReportClient, tmp_dir: Path) -> {}:
         report_data = list(reader)
 
     relevant_columns = ['AdId', 'AdTitle', 'AdGroupId', 'AdGroupName', 'CampaignId', 'CampaignName', 'AccountId',
-                        'AccountName']
+                        'AccountName', 'CurrencyCode']
     positions = [fields.index(name) for name in relevant_columns]
 
     relevant_columns.extend(['attributes'])
