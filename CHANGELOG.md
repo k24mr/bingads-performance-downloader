@@ -1,5 +1,8 @@
 # Changelog
 
+## 3.0.1 (2019-08-23)
+- Update bingads SDK to version 12.13.4
+
 ## 3.0.0 (2019-04-12)
 
 - Change MARA_XXX variables to functions to delay importing of imports
